@@ -11,7 +11,7 @@ there 4 total outcomes of this experiment
  3) Both prisoner's confess and both get 5 years in prision.
 
 Game theorist must try to determine how people will act here, they can either act selfishly and confess, or have act altruistically and stay silent,
-  it is also important to recognize that the players must also account for what they believe the other player will do, this will likely change their decision.
+  it is also important to recognize that the players must also account for what they believe the other player will do, this will likely have an effect on there decision.
 
 This program attempts to show what decisions will likely survive the evolution process. 
 
@@ -22,4 +22,10 @@ This is done by using a genetic alogrithm wich simulates evolution by following 
  4) reproduce taking attributes from both parents and having a small chance of mutation
  5) restart at 2 with new poputations for x generations 
 
+
+The Member.java class produces a object in which is a member of the population with a randomly generated gene. 
+
+The GA.java class contains the code to perform steps 1-4.
+
+The main.java class orginizes the step by step process allowing for custom run experiments.
 
