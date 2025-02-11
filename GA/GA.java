@@ -46,31 +46,12 @@ public class GA {
     }
 
     void tournament() {
-        //new arraylist for winners
         ArrayList<Member> population2 = new ArrayList<>();
 
         while (population.size() > 2) {
-            //Play the prisoners dilemma
             Member memberA = Selection();
             Member memberB = Selection();
 
-            //Version 1
-//            //if both players cooperate (both players enter the gene pool) (possibly 30% chance or reproduction)
-//            if (memberA.isDefecter() == false && memberB.isDefecter() == false) {
-//                population2.add(memberA);
-//                population2.add(memberB);
-//            }
-//            //if A cooperates and B defects (player B enters the gene pool)
-//            else if (memberA.isDefecter() == false && memberB.isDefecter() == true) {
-//                population2.add(memberB);
-//            }
-//            //if A defects and B cooperates (player A enters the gene pool)
-//            else if (memberA.isDefecter() == true && memberB.isDefecter() == false) {
-//                population2.add(memberA);
-//            }
-
-            //version 2
-            //if both players cooperate (both players enter the gene pool) (possibly 30% chance or reproduction)
             if (memberA.isDefecter() == false && memberB.isDefecter() == false) {
                 if ((Math.random() * 100) < 60) {
                     population2.add(memberA);
@@ -79,26 +60,20 @@ public class GA {
                     population2.add(memberB);
                 }
             }
-            //if A cooperates and B defects (player B enters the gene pool)
             else if (memberA.isDefecter() == false && memberB.isDefecter() == true) {
                 population2.add(memberB);
             }
-            //if A defects and B cooperates (player A enters the gene pool)
             else if (memberA.isDefecter() == true && memberB.isDefecter() == false) {
                 population2.add(memberA);
-            } else {
+            } 
+            else {
                 if ((Math.random() * 100) < 20) {
                     population2.add(memberA);
                 }
                 if ((Math.random() * 100) < 20) {
                     population2.add(memberB);
                 }
-        }
-
-
-//        }
-
-
+            }
         }
         population = population2;
     }
@@ -141,12 +116,8 @@ public class GA {
 //go through each bit and mutate according to the mutation rate
     void mutate(Member member) {
         for (int i = 0; i < 4; i++) {
-            if (Math.random() * 100 < 001) {
-                if (member.gene[i] == true) {
-                    member.gene[i] = false;
-                } else {
-                    member.gene[i] = true;
-                }
+            if (Math.random() * 100 < 0.1) {
+                member.gene[i] = !member.gene[i];
             }
         }
     }
@@ -172,10 +143,13 @@ public class GA {
    public boolean isSelfish() {
        int defectors = 0;
        int cooperators = 0;
-        if (defectors > cooperators) {
-            return true;
-        }else {
-            return false;
-        }
+       for (Member member : population) {
+           if (member.isDefecter()) {
+               defectors++;
+           } else {
+               cooperators++;
+           }
+       }
+       return defectors > cooperators;
     }
 }
